@@ -1,0 +1,114 @@
+
+
+1. Create directories 
+$
+ mkdir -p QBFT-Network-1/Node-{1..4}/data
+
+2. Create a configuration file
+    besu operator generate-blockchain-config --config-file=qbftConfigFile.json --to=networkFiles --private-key-file-name=key
+
+
+
+3. Generate node keys and a genesis file
+4. Copy the genesis file to the QBFT-Network directory
+5. Copy the node private keys to the node/data directories
+
+cp networkFiles/genesis.json .
+
+6. Start the first node as the bootnode
+
+IN Node 1
+besu --data-path=data --genesis-file=../genesis.json --rpc-http-enabled --rpc-http-api=ETH,NET,QBFT,WEB3 --host-allowlist="*" --rpc-http-cors-origins="all" --profile=ENTERPRISE --min-gas-price=1000
+
+Get the Enode : 
+
+enode://b47663d5fed91287abeb711690fcc5c249aaddcf49eb71fb71e5a5b309b54a52947459beae1e368b5d4b3931eae28e686f7be9f567286fb2a544c5b5fcc9e1fb@127.0.0.1:30303
+
+in node2
+7. Start Node-2
+
+besu --data-path=data --genesis-file=../genesis.json --bootnodes=enode://b47663d5fed91287abeb711690fcc5c249aaddcf49eb71fb71e5a5b309b54a52947459beae1e368b5d4b3931eae28e686f7be9f567286fb2a544c5b5fcc9e1fb@127.0.0.1:30303 --p2p-port=30304 --rpc-http-enabled --rpc-http-api=ETH,NET,QBFT,WEB3 --host-allowlist="*" --rpc-http-cors-origins="all" --rpc-http-port=8546 --profile=ENTERPRISE --min-gas-price=1000
+
+in node3
+8. Start Node-3
+
+besu --data-path=data --genesis-file=../genesis.json --bootnodes=enode://b47663d5fed91287abeb711690fcc5c249aaddcf49eb71fb71e5a5b309b54a52947459beae1e368b5d4b3931eae28e686f7be9f567286fb2a544c5b5fcc9e1fb@127.0.0.1:30303 --p2p-port=30305 --rpc-http-enabled --rpc-http-api=ETH,NET,QBFT,WEB3 --host-allowlist="*" --rpc-http-cors-origins="all" --rpc-http-port=8547 --profile=ENTERPRISE --min-gas-price=1000
+
+in node4
+9. Start Node-4
+
+besu --data-path=data --genesis-file=../genesis.json --bootnodes=enode://b47663d5fed91287abeb711690fcc5c249aaddcf49eb71fb71e5a5b309b54a52947459beae1e368b5d4b3931eae28e686f7be9f567286fb2a544c5b5fcc9e1fb@127.0.0.1:30303 --p2p-port=30306 --rpc-http-enabled --rpc-http-api=ETH,NET,QBFT,WEB3 --host-allowlist="*" --rpc-http-cors-origins="all" --rpc-http-port=8548 --profile=ENTERPRISE --min-gas-price=1000
+
+
+
+Docker
+
+docker run -d --name besu-node-1 \
+  -p 8545:8545 -p 30303:30303 \
+  -v ~/Desktop/besu-24.12.2/QBFT-Network-1:/besu \
+  hyperledger/besu:latest \
+  --data-path=/besu/Node-1/data \
+  --genesis-file=/besu/genesis.json \
+  --rpc-http-enabled --rpc-http-api=ETH,NET,QBFT,WEB3 \
+  --host-allowlist="*" --rpc-http-cors-origins="all" \
+  --profile=ENTERPRISE --min-gas-price=1000
+3fe1fe4803b87ae5a88b2d5387c148cb73c58eb0602114e87dfa205b1254a70d
+
+
+node2
+
+docker run -d --name besu-node-02 \
+  -p 8546:8545 -p 30304:30303 \
+  -v ~/Desktop/besu-24.12.2/QBFT-Network-1:/besu \
+  hyperledger/besu:latest \
+  --data-path=/besu/Node-2/data \
+  --genesis-file=/besu/genesis.json \
+  --bootnodes=enode://b47663d5fed91287abeb711690fcc5c249aaddcf49eb71fb71e5a5b309b54a52947459beae1e368b5d4b3931eae28e686f7be9f567286fb2a544c5b5fcc9e1fb@127.0.0.1:30303 \
+  --p2p-port=30304 \
+  --rpc-http-enabled --rpc-http-api=ETH,NET,QBFT,WEB3 \
+  --host-allowlist="*" --rpc-http-cors-origins="all" \
+  --rpc-http-port=8546 \
+  --profile=ENTERPRISE --min-gas-price=1000
+
+
+Node 3 
+
+docker run -d --name besu-node-03 \
+  -p 8547:8545 -p 30305:30303 \
+  -v ~/Desktop/besu-24.12.2/QBFT-Network-1:/besu \
+  hyperledger/besu:latest \
+  --data-path=/besu/Node-3/data \
+  --genesis-file=/besu/genesis.json \
+  --bootnodes=enode://b47663d5fed91287abeb711690fcc5c249aaddcf49eb71fb71e5a5b309b54a52947459beae1e368b5d4b3931eae28e686f7be9f567286fb2a544c5b5fcc9e1fb@127.0.0.1:30303 \
+  --p2p-port=30305 \
+  --rpc-http-enabled --rpc-http-api=ETH,NET,QBFT,WEB3 \
+  --host-allowlist="*" --rpc-http-cors-origins="all" \
+  --rpc-http-port=8547 \
+  --profile=ENTERPRISE --min-gas-price=1000
+
+
+
+docker run -d --name besu-node-4 \
+  -p 8548:8545 -p 30306:30303 \
+  -v ~/Desktop/besu-24.12.2/QBFT-Network-1:/besu \
+  hyperledger/besu:latest \
+  --data-path=/besu/Node-4/data \
+  --genesis-file=/besu/genesis.json \
+  --bootnodes=enode://b47663d5fed91287abeb711690fcc5c249aaddcf49eb71fb71e5a5b309b54a52947459beae1e368b5d4b3931eae28e686f7be9f567286fb2a544c5b5fcc9e1fb@127.0.0.1:30303 \
+  --p2p-port=30306 \
+  --rpc-http-enabled --rpc-http-api=ETH,NET,QBFT,WEB3 \
+  --host-allowlist="*" --rpc-http-cors-origins="all" \
+  --rpc-http-port=8548 \
+  --profile=ENTERPRISE --min-gas-price=1000
+
+
+
+
+sudo chown -R $(whoami):$(whoami) /home/gaian/Desktop/besu-24.12.2/QBFT-Network-1/Node-2/data/
+chmod -R u+rwX /home/gaian/Desktop/besu-24.12.2/QBFT-Network-1/Node-2/data/
+
+sudo chown -R $(whoami):$(whoami) /home/gaian/Desktop/besu-24.12.2/QBFT-Network-1/Node-3/data/
+sudo chown -R $(whoami):$(whoami) /home/gaian/Desktop/besu-24.12.2/QBFT-Network-1/Node-4/data/
+
+
+curl -X POST --data '{"jsonrpc":"2.0","method":"net_peerCount","params":[],"id":1}' localhost:8545/ -H "Content-Type: application/json"
