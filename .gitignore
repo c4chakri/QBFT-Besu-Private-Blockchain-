@@ -1,7 +1,7 @@
 /test
-/Node-1/data/caches
-/Node-1/data/database
-/Node-1/data/uploads
+./Node-1/data/caches
+./Node-1/data/database
+./Node-1/data/uploads
 /Node-2/data/caches
 /Node-2/data/database
 /Node-2/data/uploads
