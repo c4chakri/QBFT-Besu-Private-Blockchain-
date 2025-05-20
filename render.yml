@@ -1,91 +1,77 @@
-# render.yaml
-
 services:
-  - type: web   # or private/background if you don’t need a public HTTP endpoint
+  - type: private_service
     name: besu-node-1
     env: docker
     dockerfilePath: Dockerfile
-    buildCommand: ""    # let Render use default `docker build .`
     startCommand: >
       besu \
         --data-path=/besu/Node-1/data \
         --genesis-file=/besu/genesis.json \
-        --config-file=/besu/qbftConfigFile.json \
         --rpc-http-enabled --rpc-http-api=ETH,NET,QBFT,WEB3 \
-        --host-allowlist="*" \
-        --rpc-http-cors-origins="all" \
-        --p2p-port=30303 \
-        --rpc-http-port=8545 \
-        --metrics-enabled --metrics-host=0.0.0.0 --metrics-port=9545 \
-        --version-compatibility-protection=false
-    plan: free       # pick a plan that has enough CPU/RAM
-    region: iad      # or your preferred region
+        --host-allowlist="*" --rpc-http-cors-origins="all" \
+        --p2p-port=30303 --rpc-http-port=8545 \
+        --profile=ENTERPRISE --min-gas-price=1000 \
+        --version-compatibility-protection=false \
+        --metrics-enabled --metrics-host=0.0.0.0 --metrics-port=9545
+    plan: starter
+    region: iad
 
-  - type: web
+  - type: private_service
     name: besu-node-2
     env: docker
     dockerfilePath: Dockerfile
+    dependsOn:
+      - besu-node-1
     startCommand: >
       besu \
         --data-path=/besu/Node-2/data \
         --genesis-file=/besu/genesis.json \
-        --config-file=/besu/qbftConfigFile.json \
-        --bootnodes=enode://<NODE1_ENODE>@besu-node-1.internal:30303 \
-        --p2p-port=30304 \
+        --bootnodes=enode://b47663d5fed91287abeb711690fcc5c249aaddcf49eb71fb71e5a5b309b54a52947459beae1e368b5d4b3931eae28e686f7be9f567286fb2a544c5b5fcc9e1fb@127.0.0.1:30303 \
         --rpc-http-enabled --rpc-http-api=ETH,NET,QBFT,WEB3 \
-        --host-allowlist="*" \
-        --rpc-http-cors-origins="all" \
-        --rpc-http-port=8546 \
-        --metrics-enabled --metrics-host=0.0.0.0 --metrics-port=9546 \
-        --version-compatibility-protection=false
-    dependsOn:
-      - besu-node-1
-    plan: free
+        --host-allowlist="*" --rpc-http-cors-origins="all" \
+        --p2p-port=30304 --rpc-http-port=8546 \
+        --profile=ENTERPRISE --min-gas-price=1000 \
+        --version-compatibility-protection=false \
+        --metrics-enabled --metrics-host=0.0.0.0 --metrics-port=9546
+    plan: starter
     region: iad
 
-  - type: web
+  - type: private_service
     name: besu-node-3
     env: docker
     dockerfilePath: Dockerfile
+    dependsOn:
+      - besu-node-1
     startCommand: >
       besu \
         --data-path=/besu/Node-3/data \
         --genesis-file=/besu/genesis.json \
-        --config-file=/besu/qbftConfigFile.json \
-        --bootnodes=enode://<NODE1_ENODE>@besu-node-1.internal:30303 \
-        --p2p-port=30305 \
+        --bootnodes=enode://b47663d5fed91287abeb711690fcc5c249aaddcf49eb71fb71e5a5b309b54a52947459beae1e368b5d4b3931eae28e686f7be9f567286fb2a544c5b5fcc9e1fb@127.0.0.1:30303 \
         --rpc-http-enabled --rpc-http-api=ETH,NET,QBFT,WEB3 \
-        --host-allowlist="*" \
-        --rpc-http-cors-origins="all" \
-        --rpc-http-port=8547 \
-        --metrics-enabled --metrics-host=0.0.0.0 --metrics-port=9547 \
-        --version-compatibility-protection=false
-    dependsOn:
-      - besu-node-1
-    plan: free
+        --host-allowlist="*" --rpc-http-cors-origins="all" \
+        --p2p-port=30305 --rpc-http-port=8547 \
+        --profile=ENTERPRISE --min-gas-price=1000 \
+        --version-compatibility-protection=false \
+        --metrics-enabled --metrics-host=0.0.0.0 --metrics-port=9547
+    plan: starter
     region: iad
 
-  - type: web
+  - type: private_service
     name: besu-node-4
     env: docker
     dockerfilePath: Dockerfile
+    dependsOn:
+      - besu-node-1
     startCommand: >
       besu \
         --data-path=/besu/Node-4/data \
         --genesis-file=/besu/genesis.json \
-        --config-file=/besu/qbftConfigFile.json \
-        --bootnodes=enode://<NODE1_ENODE>@besu-node-1.internal:30303 \
-        --p2p-port=30306 \
+        --bootnodes=enode://b47663d5fed91287abeb711690fcc5c249aaddcf49eb71fb71e5a5b309b54a52947459beae1e368b5d4b3931eae28e686f7be9f567286fb2a544c5b5fcc9e1fb@127.0.0.1:30303 \
         --rpc-http-enabled --rpc-http-api=ETH,NET,QBFT,WEB3 \
-        --host-allowlist="*" \
-        --rpc-http-cors-origins="all" \
-        --rpc-http-port=8548 \
-        --metrics-enabled --metrics-host=0.0.0.0 --metrics-port=9548 \
-        --version-compatibility-protection=false
-    dependsOn:
-      - besu-node-1
-    plan: free
+        --host-allowlist="*" --rpc-http-cors-origins="all" \
+        --p2p-port=30306 --rpc-http-port=8548 \
+        --profile=ENTERPRISE --min-gas-price=1000 \
+        --version-compatibility-protection=false \
+        --metrics-enabled --metrics-host=0.0.0.0 --metrics-port=9548
+    plan: starter
     region: iad
-
-# (Optional) You can also define Environment entries here,
-# or set them via the Render Dashboard.
