@@ -15,9 +15,9 @@ COPY Node-3 /besu/Node-3
 COPY Node-4 /besu/Node-4
 
 # Expose P2P, RPC, and metrics ports for nodes 1–4
-EXPOSE 30303 30304 30305 30306
+# EXPOSE 30303 30304 30305 30306
 EXPOSE 8545 8546 8547 8548
-EXPOSE 9545 9546 9547 9548
+# EXPOSE 9545 9546 9547 9548
 
 # Entrypoint wraps the besu binary
 
