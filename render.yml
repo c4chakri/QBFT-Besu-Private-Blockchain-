@@ -1,22 +1,25 @@
+# render.yaml
+
 services:
-  - type: private_service
+  - type: web
     name: besu-node-1
     env: docker
     dockerfilePath: Dockerfile
+    # Bind RPC to $PORT so Render maps it to 443/HTTPs
     startCommand: >
       besu \
         --data-path=/besu/Node-1/data \
         --genesis-file=/besu/genesis.json \
         --rpc-http-enabled --rpc-http-api=ETH,NET,QBFT,WEB3 \
         --host-allowlist="*" --rpc-http-cors-origins="all" \
-        --p2p-port=30303 --rpc-http-port=8545 \
+        --p2p-port=30303 --rpc-http-port=$PORT \
         --profile=ENTERPRISE --min-gas-price=1000 \
         --version-compatibility-protection=false \
         --metrics-enabled --metrics-host=0.0.0.0 --metrics-port=9545
     plan: starter
     region: iad
 
-  - type: private_service
+  - type: web
     name: besu-node-2
     env: docker
     dockerfilePath: Dockerfile
@@ -29,14 +32,14 @@ services:
         --bootnodes=enode://b47663d5fed91287abeb711690fcc5c249aaddcf49eb71fb71e5a5b309b54a52947459beae1e368b5d4b3931eae28e686f7be9f567286fb2a544c5b5fcc9e1fb@127.0.0.1:30303 \
         --rpc-http-enabled --rpc-http-api=ETH,NET,QBFT,WEB3 \
         --host-allowlist="*" --rpc-http-cors-origins="all" \
-        --p2p-port=30304 --rpc-http-port=8546 \
+        --p2p-port=30304 --rpc-http-port=$PORT \
         --profile=ENTERPRISE --min-gas-price=1000 \
         --version-compatibility-protection=false \
         --metrics-enabled --metrics-host=0.0.0.0 --metrics-port=9546
     plan: starter
     region: iad
 
-  - type: private_service
+  - type: web
     name: besu-node-3
     env: docker
     dockerfilePath: Dockerfile
@@ -49,14 +52,14 @@ services:
         --bootnodes=enode://b47663d5fed91287abeb711690fcc5c249aaddcf49eb71fb71e5a5b309b54a52947459beae1e368b5d4b3931eae28e686f7be9f567286fb2a544c5b5fcc9e1fb@127.0.0.1:30303 \
         --rpc-http-enabled --rpc-http-api=ETH,NET,QBFT,WEB3 \
         --host-allowlist="*" --rpc-http-cors-origins="all" \
-        --p2p-port=30305 --rpc-http-port=8547 \
+        --p2p-port=30305 --rpc-http-port=$PORT \
         --profile=ENTERPRISE --min-gas-price=1000 \
         --version-compatibility-protection=false \
         --metrics-enabled --metrics-host=0.0.0.0 --metrics-port=9547
     plan: starter
     region: iad
 
-  - type: private_service
+  - type: web
     name: besu-node-4
     env: docker
     dockerfilePath: Dockerfile
@@ -69,7 +72,7 @@ services:
         --bootnodes=enode://b47663d5fed91287abeb711690fcc5c249aaddcf49eb71fb71e5a5b309b54a52947459beae1e368b5d4b3931eae28e686f7be9f567286fb2a544c5b5fcc9e1fb@127.0.0.1:30303 \
         --rpc-http-enabled --rpc-http-api=ETH,NET,QBFT,WEB3 \
         --host-allowlist="*" --rpc-http-cors-origins="all" \
-        --p2p-port=30306 --rpc-http-port=8548 \
+        --p2p-port=30306 --rpc-http-port=$PORT \
         --profile=ENTERPRISE --min-gas-price=1000 \
         --version-compatibility-protection=false \
         --metrics-enabled --metrics-host=0.0.0.0 --metrics-port=9548
