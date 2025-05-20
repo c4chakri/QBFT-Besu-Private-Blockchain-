@@ -20,20 +20,9 @@ EXPOSE 8545 8546 8547 8548
 EXPOSE 9545 9546 9547 9548
 
 # Entrypoint wraps the besu binary
+
+# Entrypoint wraps the besu binary
 ENTRYPOINT ["besu"]
 
 # Default command runs Node-1; override at runtime for other nodes
-CMD [
-"--data-path=/besu/Node-1/data",
-"--genesis-file=/besu/genesis.json",
-"--rpc-http-enabled",
-"--rpc-http-api=ETH,NET,QBFT,WEB3",
-"--host-allowlist=*",
-"--rpc-http-cors-origins=all",
-"--profile=ENTERPRISE",
-"--min-gas-price=1000",
-"--version-compatibility-protection=false",
-"--metrics-enabled",
-"--metrics-host=0.0.0.0",
-"--metrics-port=9545"
-]
+CMD ["--data-path=/besu/Node-1/data","--genesis-file=/besu/genesis.json","--config-file=/besu/qbftConfigFile.json","--rpc-http-enabled","--rpc-http-api=ETH,NET,QBFT,WEB3","--host-allowlist=*","--rpc-http-cors-origins=all","--profile=ENTERPRISE","--min-gas-price=1000","--version-compatibility-protection=false","--metrics-enabled","--metrics-host=0.0.0.0","--metrics-port=9545"]
