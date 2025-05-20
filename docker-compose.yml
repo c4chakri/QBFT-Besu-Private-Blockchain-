@@ -18,7 +18,7 @@ services:
       --genesis-file=/besu/genesis.json 
       --rpc-http-enabled --rpc-http-api=ETH,NET,QBFT,WEB3 
       --host-allowlist="*" --rpc-http-cors-origins="all" 
-      --profile=ENTERPRISE --min-gas-price=1000 
+      --profile=ENTERPRISE --min-gas-price=1000 --version-compatibility-protection=false
       --metrics-enabled --metrics-host=0.0.0.0 --metrics-port=9545
 
     networks:
@@ -44,7 +44,7 @@ services:
       --rpc-http-enabled --rpc-http-api=ETH,NET,QBFT,WEB3 
       --host-allowlist="*" --rpc-http-cors-origins="all" 
       --rpc-http-port=8546 
-      --profile=ENTERPRISE --min-gas-price=1000
+      --profile=ENTERPRISE --min-gas-price=1000 --version-compatibility-protection=false
       --metrics-enabled --metrics-host=0.0.0.0 --metrics-port=9546
 
     depends_on: 
@@ -72,7 +72,7 @@ services:
       --rpc-http-enabled --rpc-http-api=ETH,NET,QBFT,WEB3 
       --host-allowlist="*" --rpc-http-cors-origins="all" 
       --rpc-http-port=8547 
-      --profile=ENTERPRISE --min-gas-price=1000
+      --profile=ENTERPRISE --min-gas-price=1000 --version-compatibility-protection=false
       --metrics-enabled --metrics-host=0.0.0.0 --metrics-port=9547
 
     depends_on:
@@ -100,7 +100,7 @@ services:
       --rpc-http-enabled --rpc-http-api=ETH,NET,QBFT,WEB3 
       --host-allowlist="*" --rpc-http-cors-origins="all" 
       --rpc-http-port=8548 
-      --profile=ENTERPRISE --min-gas-price=1000
+      --profile=ENTERPRISE --min-gas-price=1000 --version-compatibility-protection=false
       --metrics-enabled --metrics-host=0.0.0.0 --metrics-port=9548
 
     depends_on:
