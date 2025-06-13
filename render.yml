@@ -84,15 +84,15 @@ services:
   - type: web
     name: besu-node-1
     env: docker
-    plan: standard  # "starter" does not support custom ports like 30303
-    region: iad
     dockerfilePath: Dockerfile
+    plan: standard
+    region: iad
     ports:
-      - port: 8545   # expose this even if using $PORT — Render maps it
+      - port: 8545
         protocol: tcp
-      - port: 30303  # required for P2P discovery/communication
+      - port: 30303
         protocol: tcp
-      - port: 9545   # optional: metrics
+      - port: 9545
         protocol: tcp
     startCommand: >
       besu \
@@ -105,5 +105,4 @@ services:
         --version-compatibility-protection=false \
         --metrics-enabled --metrics-host=0.0.0.0 --metrics-port=9545 \
         --nat-method=STATIC \
-        --p2p-host=vel-ae7u.onrender.com
-
+        --p2p-host=216.24.57.4
