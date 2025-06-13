@@ -23,7 +23,7 @@ EXPOSE 9545
 ENTRYPOINT ["besu"]
 
 # Default command runs Node-1; override at runtime for other nodes
-CMD ["--data-path=/besu/Node-1/data","--genesis-file=/besu/genesis.json","--rpc-http-enabled","--rpc-http-api=ETH,NET,QBFT,WEB3","--host-allowlist=*","--rpc-http-cors-origins=all","--profile=ENTERPRISE","--min-gas-price=1000","--version-compatibility-protection=false","--metrics-enabled","--metrics-host=0.0.0.0","--nat-method=STATIC","--p2p-host=216.24.57.4","--metrics-port=9545"]
+CMD ["--data-path=/besu/Node-1/data","--genesis-file=/besu/genesis.json","--rpc-http-enabled","--rpc-http-api=ETH,NET,QBFT,WEB3","--host-allowlist=*","--rpc-http-cors-origins=all","--profile=ENTERPRISE","--min-gas-price=1000","--version-compatibility-protection=false","--metrics-enabled","--metrics-host=0.0.0.0","--nat-method=AUTO","--p2p-host=216.24.57.4","--metrics-port=9545"]
 
 
 # # syntax=docker/dockerfile:1
