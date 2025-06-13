@@ -104,5 +104,6 @@ services:
         --profile=ENTERPRISE --min-gas-price=1000 \
         --version-compatibility-protection=false \
         --metrics-enabled --metrics-host=0.0.0.0 --metrics-port=9545 \
-        --nat-method=auto
+        --nat-method=STATIC \
+        --p2p-host=vel-ae7u.onrender.com
 
